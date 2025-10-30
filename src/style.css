@@ -50,4 +50,12 @@ body {
 .active {
   flex-grow: 1;
   background: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  flex-direction: column;
+}
+
+.message-form {
+
 }

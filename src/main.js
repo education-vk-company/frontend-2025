@@ -29,7 +29,9 @@ const App = () => {
       </div>
       <div class="active">
         ${ActiveChat}
-        ${ChatForm}
+        <div class="message-form">
+          ${ChatForm}
+        </div>
       </div>
     `
 
@@ -41,7 +43,5 @@ const App = () => {
 
   render();
 }
-
-
 
 App();
