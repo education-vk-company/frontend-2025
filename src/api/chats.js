@@ -1,28 +1,35 @@
 import { chatsList } from './chatsList';
 
-export const chats = [
+let lsChats = localStorage.getItem('chats')
+if (lsChats) {
+  lsChats = JSON.parse(lsChats);
+}
+
+const getCurrTime = () => new Date().toLocaleTimeString()
+
+export const chats = lsChats || [
   {
     id: 0,
     messages: [
       {
         isOurs: false,
         text: 'hello1!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello2!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello3!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello4!',
-        time: new Date(),
+        time: getCurrTime(),
       },
     ]
   },
@@ -32,22 +39,22 @@ export const chats = [
       {
         isOurs: false,
         text: 'hello5!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello6!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello7!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello8!',
-        time: new Date(),
+        time: getCurrTime(),
       },
     ]
   },
@@ -57,22 +64,22 @@ export const chats = [
       {
         isOurs: false,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
     ]
   },
@@ -82,22 +89,22 @@ export const chats = [
       {
         isOurs: false,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
       {
         isOurs: true,
         text: 'hello!',
-        time: new Date(),
+        time: getCurrTime(),
       },
     ]
   },
@@ -108,3 +115,13 @@ export const chats = [
   }
 })
 
+export const addMyMessageToChat = (id, text) => {
+  const chat = chats.find(chatItem => chatItem.id === id);
+  chat.messages.push({
+    isOurs: true,
+    text,
+    time: getCurrTime(),
+  })
+
+  localStorage.setItem('chats', JSON.stringify(chats));
+}

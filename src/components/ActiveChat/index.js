@@ -14,7 +14,7 @@ const Message = (text, time, isMy) => {
 
 export const ActiveChatComponent = ({messages}) => {
 
-  const MessagesList = messages.map((msg) => Message(msg.text, msg.time.toLocaleTimeString(), msg.isOurs)).join('')
+  const MessagesList = messages.map((msg) => Message(msg.text, msg.time, msg.isOurs)).join('')
 
   return `
     <div class="ac-container">

@@ -1,3 +1,5 @@
+const getCurrTime = () => new Date().toLocaleTimeString()
+
 export const chatsList = [
   {
     id: 0,
@@ -13,7 +15,7 @@ export const chatsList = [
         type: 'image',
         src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
       },
-      time: new Date(),
+      time: getCurrTime(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -31,7 +33,7 @@ export const chatsList = [
         type: 'image',
         src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
       },
-      time: new Date(),
+      time: getCurrTime(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -45,7 +47,7 @@ export const chatsList = [
       text: 'Осёл, куда делась моя еда?',
       isOurs: false,
       isRead: true,
-      time: new Date(),
+      time: getCurrTime(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -59,7 +61,7 @@ export const chatsList = [
       text: 'Прости, сегодня не приду ((',
       isOurs: false,
       isRead: true,
-      time: new Date(),
+      time: getCurrTime(),
     },
     avatar: 'https://avatar.iran.liara.run/public/girl',
   },

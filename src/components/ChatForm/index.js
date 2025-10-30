@@ -1,7 +1,7 @@
 export const ChatFormComponent = () => {
   return `
     <form>
-      <input type="text" placeholder="Type here..." />
+      <input type="text" placeholder="Type here..." name="mymessage" />
       <input type="submit" />
     </form>
   `
@@ -22,14 +22,12 @@ const UnlistenFormSubmit = () => {
 export const ListenFormSubmit = (formElement, callback) => {
   UnlistenFormSubmit();
 
-  elementWithChats.querySelectorAll('a').forEach((a) => {
-    const listenerCallback = (e) => {
-      e.preventDefault();
-      const clickedIndex = a.href.split('/').at(-1);
-      callback(+clickedIndex)
-    }
+  const listenerCallback = (e) => {
+    e.preventDefault();
+    callback(e)
+  }
 
-    elPool.push([a, listenerCallback])
-    a.addEventListener('click', listenerCallback);
-  })
+  formUnlistenMap.push(formElement, listenerCallback)
+
+  formElement.addEventListener('submit', listenerCallback);
 }
