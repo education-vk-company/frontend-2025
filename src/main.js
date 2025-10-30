@@ -1,11 +1,20 @@
 import './style.css'
 
-document.querySelector('#app').innerHTML = `
-  <div class="chats">
-    chats
-  </div>
-  <div class="active">
-    active
-  </div>
-`
+import { ChatItemComponent } from './components/ChatItem'
+
+const App = () => {
+  const ChatItem = ChatItemComponent('Дженифер')
+  document.querySelector('#app').innerHTML = `
+    <div class="chats">
+      ${ChatItem}
+    </div>
+    <div class="active">
+      active
+    </div>
+  `
+}
+
+
+
+App();
 
