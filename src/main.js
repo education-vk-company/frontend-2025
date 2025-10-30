@@ -1,25 +1,40 @@
 import './style.css'
 
-import { ChatItemComponent } from './components/ChatItem'
+import { ChatItemComponent, ListenChatClick } from './components/ChatItem'
+
+import { ActiveChatComponent } from './components/ActiveChat'
 import { chats as chatsApi } from './api'
 
 const App = () => {
-  // ChatItemComponent('Дженифер')
-  const ChatItems = chatsApi.map((chatElement) => ChatItemComponent(
-    chatElement.name,
-    chatElement.avatar,
-    chatElement.lastMessage.text,
-    chatElement.lastMessage.time.toLocaleTimeString(),
-  )).join('')
+  let activeChatID = 0;
 
-  document.querySelector('#app').innerHTML = `
-    <div class="chats">
-      ${ChatItems}
-    </div>
-    <div class="active">
-      active
-    </div>
-  `
+  const render = () => {
+    const ChatItems = chatsApi.map((chatElement, index) => ChatItemComponent(
+      chatElement.name,
+      chatElement.avatar,
+      chatElement.lastMessage.text,
+      chatElement.lastMessage.time.toLocaleTimeString(),
+      index,
+    )).join('')
+
+    const ActiveChat = ActiveChatComponent(activeChatID);
+
+    document.querySelector('#app').innerHTML = `
+      <div class="chats">
+        ${ChatItems}
+      </div>
+      <div class="active">
+        ${ActiveChat}
+      </div>
+    `
+  }
+
+  render();
+
+  ListenChatClick(document.querySelector('.chats'), (clickedIndex) => {
+    activeChatID = clickedIndex;
+    render();
+  })
 }
 
 
