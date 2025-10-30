@@ -11,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --border-color: #ccc;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -31,7 +37,6 @@ body {
 
 .chats {
   width: 300px;
-  background: grey;
 }
 
 .active {

@@ -11,7 +11,8 @@ export const chats = [
       attachment: {
         type: 'image',
         src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
-      }
+      },
+      time: new Date(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -28,6 +29,7 @@ export const chats = [
         type: 'image',
         src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
       },
+      time: new Date(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -40,6 +42,7 @@ export const chats = [
       text: 'Осёл, куда делась моя еда?',
       isOurs: false,
       isRead: true,
+      time: new Date(),
     },
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
@@ -52,6 +55,7 @@ export const chats = [
       text: 'Прости, сегодня не приду ((',
       isOurs: false,
       isRead: true,
+      time: new Date(),
     },
     avatar: 'https://avatar.iran.liara.run/public/girl',
   },

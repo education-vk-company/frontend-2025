@@ -1,9 +1,10 @@
 .chat-item {
   display: flex;
+  border-bottom: 1px solid var(--border-color);
+  padding: 4px;
 }
 
 .ava {
-  background: url('/user.png');
   background-size: cover;
   height: 50px;
   width: 50px;

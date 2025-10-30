@@ -1,14 +1,20 @@
 import './style.css'
 
 import { ChatItemComponent } from './components/ChatItem'
-import { chats } from './api'
+import { chats as chatsApi } from './api'
 
 const App = () => {
-  const ChatItem = ChatItemComponent('Дженифер')
+  // ChatItemComponent('Дженифер')
+  const ChatItems = chatsApi.map((chatElement) => ChatItemComponent(
+    chatElement.name,
+    chatElement.avatar,
+    chatElement.lastMessage.text,
+    chatElement.lastMessage.time.toLocaleTimeString(),
+  )).join('')
+
   document.querySelector('#app').innerHTML = `
     <div class="chats">
-      ${JSON.stringify(chats)}
-      ${ChatItem}
+      ${ChatItems}
     </div>
     <div class="active">
       active
