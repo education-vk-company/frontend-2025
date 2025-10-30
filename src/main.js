@@ -18,8 +18,7 @@ const App = () => {
     )).join('')
 
 
-    const ActiveChat = chats.map();
-    ActiveChatComponent(activeChatID);
+    const ActiveChat = chats.map(chat => ActiveChatComponent(activeChatID));
 
     document.querySelector('#app').innerHTML = `
       <div class="chats">
