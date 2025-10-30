@@ -1,4 +1,4 @@
-export const chats = [
+export const chatsList = [
   {
     name: 'Shrek',
     type: 'pm',
