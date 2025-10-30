@@ -6,19 +6,23 @@ export const chats = [
     messages: [
       {
         isOurs: false,
-        text: 'hello!'
+        text: 'hello1!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello2!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello3!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello4!',
+        time: new Date(),
       },
     ]
   },
@@ -27,19 +31,23 @@ export const chats = [
     messages: [
       {
         isOurs: false,
-        text: 'hello!'
+        text: 'hello5!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello6!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello7!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello8!',
+        time: new Date(),
       },
     ]
   },
@@ -48,19 +56,23 @@ export const chats = [
     messages: [
       {
         isOurs: false,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
     ]
   },
@@ -69,20 +81,30 @@ export const chats = [
     messages: [
       {
         isOurs: false,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
       {
         isOurs: true,
-        text: 'hello!'
+        text: 'hello!',
+        time: new Date(),
       },
     ]
   },
-].map(chat => ({...chat, name: chatsList.find(chatListItem => chatListItem.id === chat.id )}.name))
+].map(chat => {
+  return {
+    ...chat,
+    name: chatsList.find(chatListItem => chatListItem.id === chat.id ).name
+  }
+})
+

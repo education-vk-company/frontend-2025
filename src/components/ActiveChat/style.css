@@ -1,3 +1,8 @@
+.ac-wrapper {
+  display: flex;
+  width: 100%;
+}
+
 .ac-message {
   border: 1px solid black;
   padding: 8px;
@@ -5,6 +10,6 @@
   width: 300px;
 }
 
-.ac-message_left {
-
+.ac-message_right {
+  justify-content: flex-end;
 }

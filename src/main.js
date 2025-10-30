@@ -1,9 +1,10 @@
 import './style.css'
 
 import { ChatItemComponent, ListenChatClick } from './components/ChatItem'
+import { chats, chatsList } from './api'
 
 import { ActiveChatComponent } from './components/ActiveChat'
-import { chatsList, chats } from './api'
+import { ChatFormComponent } from './components/ChatForm'
 
 const App = () => {
   let activeChatID = 0;
@@ -18,7 +19,9 @@ const App = () => {
     )).join('')
 
 
-    const ActiveChat = chats.map(chat => ActiveChatComponent(activeChatID));
+    const ActiveChat = ActiveChatComponent(chats.find((activeChatElement) => activeChatElement.id === activeChatID));
+
+    const ChatForm = ChatFormComponent()
 
     document.querySelector('#app').innerHTML = `
       <div class="chats">
@@ -26,6 +29,7 @@ const App = () => {
       </div>
       <div class="active">
         ${ActiveChat}
+        ${ChatForm}
       </div>
     `
 
