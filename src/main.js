@@ -27,14 +27,14 @@ const App = () => {
         ${ActiveChat}
       </div>
     `
+
+    ListenChatClick(document.querySelector('.chats'), (clickedIndex) => {
+      activeChatID = clickedIndex;
+      render();
+    })
   }
 
   render();
-
-  ListenChatClick(document.querySelector('.chats'), (clickedIndex) => {
-    activeChatID = clickedIndex;
-    render();
-  })
 }
 
 
