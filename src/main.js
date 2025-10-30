@@ -3,7 +3,7 @@ import './style.css'
 import { ChatItemComponent, ListenChatClick } from './components/ChatItem'
 
 import { ActiveChatComponent } from './components/ActiveChat'
-import { chatsList } from './api'
+import { chatsList, chats } from './api'
 
 const App = () => {
   let activeChatID = 0;
@@ -17,7 +17,9 @@ const App = () => {
       index,
     )).join('')
 
-    const ActiveChat = ActiveChatComponent(activeChatID);
+
+    const ActiveChat = chats.map();
+    ActiveChatComponent(activeChatID);
 
     document.querySelector('#app').innerHTML = `
       <div class="chats">

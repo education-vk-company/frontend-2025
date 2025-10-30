@@ -1,5 +1,6 @@
 export const chatsList = [
   {
+    id: 0,
     name: 'Shrek',
     type: 'pm',
     unreadMessages: 99,
@@ -17,6 +18,7 @@ export const chatsList = [
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
   {
+    id: 1,
     name: 'Donkey',
     type: 'pm',
     unreadMessages: 99,
@@ -34,6 +36,7 @@ export const chatsList = [
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
   {
+    id: 2,
     name: 'Swamp',
     type: 'chat',
     unreadMessages: 228,
@@ -47,6 +50,7 @@ export const chatsList = [
     avatar: 'https://avatar.iran.liara.run/public/boy',
   },
   {
+    id: 3,
     name: 'Fiona',
     type: 'pm',
     unreadMessages: 0,
