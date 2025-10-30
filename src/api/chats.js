@@ -1,62 +1,88 @@
+import { chatsList } from './chatsList';
+
 export const chats = [
   {
-    name: 'Shrek',
-    type: 'pm',
-    unreadMessages: 99,
-    hasMentions: false,
-    lastMessage: {
-      text: 'Azaza, ya tibya zatrallil)))00)0)nulik))00',
-      isOurs: true,
-      isRead: true,
-      attachment: {
-        type: 'image',
-        src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
+    id: 0,
+    messages: [
+      {
+        isOurs: false,
+        text: 'hello!'
       },
-      time: new Date(),
-    },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
-  },
-  {
-    name: 'Donkey',
-    type: 'pm',
-    unreadMessages: 99,
-    hasMentions: true,
-    lastMessage: {
-      text: 'А я осёл!',
-      isOurs: true,
-      isRead: true,
-      attachment: {
-        type: 'image',
-        src: 'https://otvet.cdn-vk.net/pictures/logo.svg',
+      {
+        isOurs: true,
+        text: 'hello!'
       },
-      time: new Date(),
-    },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+    ]
   },
   {
-    name: 'Swamp',
-    type: 'chat',
-    unreadMessages: 228,
-    hasMentions: true,
-    lastMessage: {
-      text: 'Осёл, куда делась моя еда?',
-      isOurs: false,
-      isRead: true,
-      time: new Date(),
-    },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
+    id: 1,
+    messages: [
+      {
+        isOurs: false,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+    ]
   },
   {
-    name: 'Fiona',
-    type: 'pm',
-    unreadMessages: 0,
-    hasMentions: false,
-    lastMessage: {
-      text: 'Прости, сегодня не приду ((',
-      isOurs: false,
-      isRead: true,
-      time: new Date(),
-    },
-    avatar: 'https://avatar.iran.liara.run/public/girl',
+    id: 2,
+    messages: [
+      {
+        isOurs: false,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+    ]
   },
-]
+  {
+    id: 3,
+    messages: [
+      {
+        isOurs: false,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+      {
+        isOurs: true,
+        text: 'hello!'
+      },
+    ]
+  },
+].map(chat => ({...chat, name: chatsList.find(chatListItem => chatListItem.id === chat.id )}.name))

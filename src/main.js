@@ -3,13 +3,13 @@ import './style.css'
 import { ChatItemComponent, ListenChatClick } from './components/ChatItem'
 
 import { ActiveChatComponent } from './components/ActiveChat'
-import { chats as chatsApi } from './api'
+import { chatsList, chats } from './api'
 
 const App = () => {
   let activeChatID = 0;
 
   const render = () => {
-    const ChatItems = chatsApi.map((chatElement, index) => ChatItemComponent(
+    const ChatItems = chatsList.map((chatElement, index) => ChatItemComponent(
       chatElement.name,
       chatElement.avatar,
       chatElement.lastMessage.text,
@@ -17,7 +17,8 @@ const App = () => {
       index,
     )).join('')
 
-    const ActiveChat = ActiveChatComponent(activeChatID);
+
+    const ActiveChat = chats.map(chat => ActiveChatComponent(activeChatID));
 
     document.querySelector('#app').innerHTML = `
       <div class="chats">
