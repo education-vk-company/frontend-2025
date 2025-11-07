@@ -6,14 +6,21 @@ export const List = ({ list }) => {
       backgroundImage: `url(${avatar})`,
     }
 
+    const linkClickClb = (e) => {
+      e.preventDefault()
+    }
+
     return (
-      <a className={styles.chatItem} href="/" >
+      <a
+        className={styles.chatItem} href="/"
+        onClick={(e) => linkClickClb(e)}
+      >
         <div className={styles.ava} style={avatarStyles}></div>
         <div className={styles.preview}>
           <div className={styles.nickname}>{nickname}</div>
           <div className={styles.message}>{text}</div>
         </div>
-        <div class="meta">{time}</div>
+        <div className={styles.meta}>{time}</div>
       </a>
     )
   }

@@ -1,4 +1,4 @@
-import { ActiveMessage } from './components/ActiveMessage/ActiveMessage'
+import { ActiveChat } from './components/ActiveChat/ActiveChat'
 import { List } from './components/List/List'
 import { chatsApi } from './api/chats'
 import { chatsListApi } from './api/chatsList'
@@ -15,13 +15,9 @@ function App() {
       <div>
         <List list={chatsList} />
       </div>
-      <div>
-        <ActiveMessage
-          isMy={activeChat[0].isOurs}
-          text={activeChat[0].text}
-          time={activeChat[0].time}
-        />
-      </div>
+      <ActiveChat
+        messages={activeChat[0].messages}
+      />
     </div>
   )
 }

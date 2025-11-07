@@ -1,5 +1,11 @@
 .acWrapper {
   display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.acMessageWrapper {
+  display: flex;
   width: 100%;
 }
 
