@@ -1,7 +1,7 @@
-import styles from './List.module.css'
+import styles from './List.module.scss'
 import classNames from 'classnames'
 
-export const List = ({ list, linkClickCallback: callback }) => {
+export const List = ({ list, linkClickCallback: callback, activeId }) => {
   const ChatItem = ({ id, avatar, nickname, text, time }) => {
     const avatarStyles = {
       backgroundImage: `url(${avatar})`,
@@ -28,7 +28,7 @@ export const List = ({ list, linkClickCallback: callback }) => {
   }
 
   const ListEl = list.map(({ id, name, lastMessage, avatar }) => (
-    <li className={classNames(styles.listItemWrapper, {[styles.listItemWrapper]: false })} key={id}>
+    <li className={classNames(styles.listItemWrapper, {[styles.listItemWrapperActive]: activeId === id })} key={id}>
       <ChatItem
         id={id}
         nickname={name}
