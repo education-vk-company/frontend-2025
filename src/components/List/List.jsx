@@ -1,4 +1,5 @@
 import styles from './List.module.css'
+import classNames from 'classnames'
 
 export const List = ({ list, linkClickCallback: callback }) => {
   const ChatItem = ({ id, avatar, nickname, text, time }) => {
@@ -27,7 +28,7 @@ export const List = ({ list, linkClickCallback: callback }) => {
   }
 
   const ListEl = list.map(({ id, name, lastMessage, avatar }) => (
-    <li key={id}>
+    <li className={classNames(styles.listItemWrapper, {[styles.listItemWrapper]: false })} key={id}>
       <ChatItem
         id={id}
         nickname={name}
