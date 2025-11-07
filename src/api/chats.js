@@ -1,13 +1,13 @@
-import { chatsList } from './chatsList';
+import { chatsListApi } from './chatsList';
 
-let lsChats = localStorage.getItem('chats')
-if (lsChats) {
-  lsChats = JSON.parse(lsChats);
-}
+// let lsChats = localStorage.getItem('chats')
+// if (lsChats) {
+//   lsChats = JSON.parse(lsChats);
+// }
 
 const getCurrTime = () => new Date().toLocaleTimeString()
 
-export const chats = lsChats || [
+export const chatsApi = [
   {
     id: 0,
     messages: [
@@ -111,17 +111,17 @@ export const chats = lsChats || [
 ].map(chat => {
   return {
     ...chat,
-    name: chatsList.find(chatListItem => chatListItem.id === chat.id ).name
+    name: chatsListApi.find(chatListItem => chatListItem.id === chat.id ).name
   }
 })
 
-export const addMyMessageToChat = (id, text) => {
-  const chat = chats.find(chatItem => chatItem.id === id);
-  chat.messages.push({
-    isOurs: true,
-    text,
-    time: getCurrTime(),
-  })
+// export const addMyMessageToChat = (id, text) => {
+//   const chat = chats.find(chatItem => chatItem.id === id);
+//   chat.messages.push({
+//     isOurs: true,
+//     text,
+//     time: getCurrTime(),
+//   })
 
-  localStorage.setItem('chats', JSON.stringify(chats));
-}
+//   localStorage.setItem('chats', JSON.stringify(chats));
+// }
