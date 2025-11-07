@@ -1,4 +1,5 @@
 import styles from './List.module.css'
+import classNames from 'classnames'
 
 export const List = ({ list }) => {
   const ChatItem = ({ avatar, nickname, text, time }) => {
@@ -26,7 +27,7 @@ export const List = ({ list }) => {
   }
 
   const ListEl = list.map(({ id, name, lastMessage, avatar }) => (
-    <li key={id}>
+    <li className={classNames(styles.listItemWrapper, {[styles.listItemWrapper]: false })} key={id}>
       <ChatItem
         nickname={name}
         time={lastMessage.time}

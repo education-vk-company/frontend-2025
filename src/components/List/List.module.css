@@ -1,5 +1,19 @@
 .listWrapper {
   list-style: none;
+
+}
+
+.listItemWrapper {
+  background-color: white;
+  transition: background-color 0.4s ease;
+
+  &:hover {
+    background-color: #ccc;
+  }
+
+  &Active {
+    background-color: #cccfff;
+  }
 }
 
 .chatItem {
