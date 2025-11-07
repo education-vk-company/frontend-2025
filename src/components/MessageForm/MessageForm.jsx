@@ -1,4 +1,5 @@
-import { useRef } from 'react'
+import styles from './MessageForm.module.scss'
+import { useRef } from 'react';
 
 export const MessageForm = ({ onFormSubmit }) => {
   const inputRef = useRef(null);
@@ -14,12 +15,8 @@ export const MessageForm = ({ onFormSubmit }) => {
   }
 
   return (
-    <form onSubmit={(e) => onSubmit(e)}>
-      <input
-        type="text"
-        placeholder="Input text"
-        ref={inputRef}
-      />
+    <form className={styles.form} onSubmit={onSubmit}>
+      <input className={styles.input} type="text" placeholder="Input text" ref={inputRef} />
       <input type="submit"/ >
     </form>
   )

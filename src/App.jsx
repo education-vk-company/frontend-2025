@@ -23,6 +23,7 @@ function App() {
       <div>
         <List
           list={chatsList}
+          activeId={activeChatID}
           linkClickCallback={(id) => {setActiveChatID(id)}}
         />
       </div>
