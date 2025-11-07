@@ -1,5 +1,6 @@
 import { ActiveChat } from './components/ActiveChat/ActiveChat'
 import { List } from './components/List/List'
+import { MessageForm } from './components/MessageForm/MessageForm'
 import { chatsApi } from './api/chats'
 import { chatsListApi } from './api/chatsList'
 // import styles from './App.css'
@@ -19,9 +20,12 @@ function App() {
           linkClickCallback={(id) => {setActiveChatID(id)}}
         />
       </div>
-      <ActiveChat
-        messages={activeChat[activeChatID].messages}
-      />
+      <div className={styles.RightColumn}>
+        <ActiveChat
+          messages={activeChat[activeChatID].messages}
+        />
+        <MessageForm />
+      </div>
     </div>
   )
 }

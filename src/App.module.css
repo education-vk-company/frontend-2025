@@ -25,3 +25,9 @@
   height: 100%;
   flex-direction: column;
 }
+
+.RightColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
