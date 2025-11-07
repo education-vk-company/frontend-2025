@@ -1,13 +1,14 @@
 import styles from './List.module.css'
 
-export const List = ({ list }) => {
-  const ChatItem = ({ avatar, nickname, text, time }) => {
+export const List = ({ list, linkClickCallback: callback }) => {
+  const ChatItem = ({ id, avatar, nickname, text, time }) => {
     const avatarStyles = {
       backgroundImage: `url(${avatar})`,
     }
 
     const linkClickClb = (e) => {
       e.preventDefault()
+      callback(id)
     }
 
     return (
@@ -28,6 +29,7 @@ export const List = ({ list }) => {
   const ListEl = list.map(({ id, name, lastMessage, avatar }) => (
     <li key={id}>
       <ChatItem
+        id={id}
         nickname={name}
         time={lastMessage.time}
         avatar={avatar}

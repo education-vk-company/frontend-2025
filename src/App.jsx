@@ -7,16 +7,20 @@ import styles from './App.module.css'
 import { useState } from 'react'
 
 function App() {
+  const [activeChatID, setActiveChatID] = useState(0)
   const [chatsList, setChatsList] = useState(chatsListApi)
   const [activeChat, setActiveChat] = useState(chatsApi)
 
   return (
     <div className={styles.App}>
       <div>
-        <List list={chatsList} />
+        <List
+          list={chatsList}
+          linkClickCallback={(id) => {setActiveChatID(id)}}
+        />
       </div>
       <ActiveChat
-        messages={activeChat[0].messages}
+        messages={activeChat[activeChatID].messages}
       />
     </div>
   )
