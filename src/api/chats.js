@@ -207,3 +207,12 @@ export const addMyMessageToChat = (activeChatID, text) => {
 
   return chatsApi.slice(0);
 }
+
+export const deleteMyMessage = (activeChatID, messageID) => {
+  const chat = chatsApi.find(chatItem => chatItem.id === activeChatID);
+  chat.messages.splice(messageID, 1)
+
+  localStorage.setItem('chats', JSON.stringify(chatsApi));
+
+  return chatsApi.slice(0);
+}

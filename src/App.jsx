@@ -1,4 +1,4 @@
-import { addMyMessageToChat, chatsApi } from './api/chats'
+import { addMyMessageToChat, chatsApi, deleteMyMessage } from './api/chats'
 
 import { ActiveChat } from './components/ActiveChat/ActiveChat'
 import { List } from './components/List/List'
@@ -18,6 +18,11 @@ function App() {
     setActiveChat(myNewApi);
   }
 
+  const onMessageDelete = (messageID) => {
+    const myNewApi = deleteMyMessage(activeChatID, messageID)
+    setActiveChat(myNewApi);
+  }
+
   return (
     <div className={styles.App}>
       <div>
@@ -31,6 +36,7 @@ function App() {
         <ActiveChat
           messages={activeChat[activeChatID].messages}
           messagesLength={activeChat[activeChatID].messages.length}
+          deleteMsgCallback={onMessageDelete}
         />
         <MessageForm onFormSubmit={(text) => onFormSubmit(text)} />
       </div>
