@@ -1,18 +1,22 @@
+import { ActiveMessage } from './components/ActiveMessage/ActiveMessage'
 import { List } from './components/List/List'
+import { chatsListApi } from './api/chatsList'
 // import styles from './App.css'
 import styles from './App.module.css'
 import { useState } from 'react'
 
 function App() {
-  const [chatsList, setChatsList] = useState({})
+  const [chatsList, setChatsList] = useState(chatsListApi)
   const [activeChat, setActiveChat] = useState({})
 
   return (
     <div className={styles.App}>
       <div>
-        {/* <List /> */}
+        <List list={chatsList} />
       </div>
-      <div>active</div>
+      <div>
+        <ActiveMessage />
+      </div>
     </div>
   )
 }

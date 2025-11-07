@@ -1,3 +1,27 @@
 .App {
-  color: red;
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.12);
+  height: 90vh;
+  justify-content: space-between;
+}
+
+.chats {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.active {
+  flex-grow: 1;
+  background: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  flex-direction: column;
 }

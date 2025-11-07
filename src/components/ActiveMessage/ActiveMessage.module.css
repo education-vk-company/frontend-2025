@@ -1,0 +1,15 @@
+.acWrapper {
+  display: flex;
+  width: 100%;
+}
+
+.acMessage {
+  border: 1px solid black;
+  padding: 8px;
+  margin-bottom: 4px;
+  width: 300px;
+}
+
+.acMessage_right {
+  justify-content: flex-end;
+}

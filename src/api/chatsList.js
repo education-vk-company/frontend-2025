@@ -1,6 +1,6 @@
 const getCurrTime = () => new Date().toLocaleTimeString()
 
-export const chatsList = [
+export const chatsListApi = [
   {
     id: 0,
     name: 'Shrek',
