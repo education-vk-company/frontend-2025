@@ -12,6 +12,8 @@ export const MessageForm = ({ onFormSubmit }) => {
     }
 
     onFormSubmit(inputEl.value)
+
+    inputEl.value = '';
   }
 
   return (

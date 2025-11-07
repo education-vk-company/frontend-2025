@@ -30,6 +30,7 @@ function App() {
       <div className={styles.RightColumn}>
         <ActiveChat
           messages={activeChat[activeChatID].messages}
+          messagesLength={activeChat[activeChatID].messages.length}
         />
         <MessageForm onFormSubmit={(text) => onFormSubmit(text)} />
       </div>
