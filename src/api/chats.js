@@ -22,7 +22,27 @@ export const chatsApi = [
         time: getCurrTime(),
       },
       {
+        isOurs: false,
+        text: 'hello3!',
+        time: getCurrTime(),
+      },
+      {
         isOurs: true,
+        text: 'hello4!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
+        text: 'hello1!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello2!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
         text: 'hello3!',
         time: getCurrTime(),
       },
@@ -47,7 +67,27 @@ export const chatsApi = [
         time: getCurrTime(),
       },
       {
+        isOurs: false,
+        text: 'hello7!',
+        time: getCurrTime(),
+      },
+      {
         isOurs: true,
+        text: 'hello8!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
+        text: 'hello5!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello6!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
         text: 'hello7!',
         time: getCurrTime(),
       },
@@ -72,7 +112,27 @@ export const chatsApi = [
         time: getCurrTime(),
       },
       {
+        isOurs: false,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
         isOurs: true,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: false,
         text: 'hello!',
         time: getCurrTime(),
       },
@@ -86,6 +146,26 @@ export const chatsApi = [
   {
     id: 3,
     messages: [
+      {
+        isOurs: false,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
+      {
+        isOurs: true,
+        text: 'hello!',
+        time: getCurrTime(),
+      },
       {
         isOurs: false,
         text: 'hello!',
