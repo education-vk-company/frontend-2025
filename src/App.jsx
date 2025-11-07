@@ -1,5 +1,4 @@
-import './App.css'
-
+import styles from './App.css'
 import { useState } from 'react'
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
   const [activeChat, setActiveChat] = useState({})
 
   return (
-    <div>
+    <div className={styles.App}>
       <div>list</div>
       <div>active</div>
     </div>
