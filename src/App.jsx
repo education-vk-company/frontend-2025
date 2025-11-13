@@ -1,45 +1,39 @@
-import { addMyMessageToChat, chatsApi, deleteMyMessage } from './api/chats'
+import { useEffect, useState } from 'react'
 
-import { ActiveChat } from './components/ActiveChat/ActiveChat'
-import { List } from './components/List/List'
-import { MessageForm } from './components/MessageForm/MessageForm'
-import { chatsListApi } from './api/chatsList'
-// import styles from './App.css'
-import styles from './App.module.css'
-import { useState } from 'react'
+import { AboutPage } from './pages/About'
+import { ContactsPage } from './pages/Contacts'
+import { LoginPage } from './pages/Login'
 
 function App() {
-  const [activeChatID, setActiveChatID] = useState(0)
-  const [chatsList, setChatsList] = useState(chatsListApi)
-  const [activeChat, setActiveChat] = useState(chatsApi)
 
-  const onFormSubmit = (messageText) => {
-    const myNewApi = addMyMessageToChat(activeChatID, messageText)
-    setActiveChat(myNewApi);
-  }
+  const [page, setPage] = useState(location.hash.slice(1));
 
-  const onMessageDelete = (messageID) => {
-    const myNewApi = deleteMyMessage(activeChatID, messageID)
-    setActiveChat(myNewApi);
-  }
+  useEffect(() => {
+    window.addEventListener('hashchange', () => {
+      const pageFromHash = location.hash.slice(1)
+      setPage(pageFromHash)
+    });
+  }, [])
 
   return (
-    <div className={styles.App}>
-      <div>
-        <List
-          list={chatsList}
-          activeId={activeChatID}
-          linkClickCallback={(id) => {setActiveChatID(id)}}
-        />
-      </div>
-      <div className={styles.RightColumn}>
-        <ActiveChat
-          messages={activeChat[activeChatID].messages}
-          messagesLength={activeChat[activeChatID].messages.length}
-          deleteMsgCallback={onMessageDelete}
-        />
-        <MessageForm onFormSubmit={(text) => onFormSubmit(text)} />
-      </div>
+    <div>
+      <header>
+        <ul>
+          <li>
+            <a href="#about">About</a>
+          </li>
+          <li>
+            <a href="#contacts">Contacts</a>
+          </li>
+          <li>
+            <a href="#login">Login</a>
+          </li>
+        </ul>
+      </header>
+
+      { page === 'about' && <AboutPage />}
+      { page === 'contacts' && <ContactsPage />}
+      { page === 'login' && <LoginPage />}
     </div>
   )
 }
