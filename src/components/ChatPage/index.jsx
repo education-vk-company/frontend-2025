@@ -3,7 +3,8 @@ import { memo, useEffect } from 'react'
 import { ActiveChat } from '../ActiveChat/ActiveChat'
 import { List } from '../List/List'
 import { MessageForm } from '../MessageForm/MessageForm'
-import styles from '../../App.module.css'
+import classNames from 'classnames'
+import styles from './ChatPage.module.scss'
 import { useMessagesStore } from '../../store/messages'
 import { useParams } from 'react-router-dom'
 
@@ -23,7 +24,7 @@ export const ChatPage = ({ onMessageDelete, onFormSubmit }) => {
 
   return (
     <>
-      <div>
+      <div className={classNames(styles.ChatPage)}>
         <List
           list={chatsList}
           activeId={activeChatID}

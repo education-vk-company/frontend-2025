@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 import classNames from 'classnames'
-import styles from './ActiveChat.module.css'
+import styles from './ActiveChat.module.scss'
 
 export const ActiveChat = ({ messages, messagesLength, deleteMsgCallback }) => {
   const scrollElRef = useRef(null);
@@ -21,10 +21,12 @@ export const ActiveChat = ({ messages, messagesLength, deleteMsgCallback }) => {
     >
       <div className={styles.acMessage}>
         <div className={styles.acText}>{text}</div>
-        <div className={styles.acTime}>{time}</div>
-        {
-          isOurs && <button onClick={() => onDeleteClick()}>❌</button>
-        }
+        <div className={styles.acDeleteBtnContainer}>
+          <div className={styles.acTime}>{time}</div>
+          {
+            isOurs && <button className={styles.acDeleteBtn} onClick={() => onDeleteClick()}>❌</button>
+          }
+          </div>
       </div>
     </div>
   )

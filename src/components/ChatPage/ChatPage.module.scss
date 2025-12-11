@@ -1,0 +1,10 @@
+.ChatPage {
+  border-right: 1px solid var(--border-color);
+}
+
+.RightColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}

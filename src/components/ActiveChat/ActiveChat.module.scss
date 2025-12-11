@@ -17,8 +17,26 @@
   margin-bottom: 4px;
   width: 300px;
   border-radius: 4px;
+
+  .acMessage_right & {
+    background-color: #cccccc1f;
+
+  }
 }
 
 .acMessage_right {
   justify-content: flex-end;
+}
+
+.acTime {
+
+}
+
+.acDeleteBtnContainer {
+ display: flex;
+ justify-content: space-between;
+}
+
+.acDeleteBtn {
+
 }
