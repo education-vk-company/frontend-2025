@@ -1,7 +1,5 @@
-import { chatsApi, getCurrTime } from '../api/chats'
-
-import { chatsListApi } from '../api/chatsList'
 import { create } from 'zustand'
+import { getCurrTime } from '../../server/utils';
 
 export const useMessagesStore = create((set, get) => ({
   chatsList: [],
@@ -11,27 +9,43 @@ export const useMessagesStore = create((set, get) => ({
     // ]
   },
 
-  fetchChatsList: () => {
-    set((state) => ({ chatsList: chatsListApi }))
+  fetchChatsList: async () => {
+    const resP = await fetch('/api/chatslist');
+    const res = await resP.json()
+    set((state) => ({ chatsList: res }))
   },
 
-  fetchChatByID: (id) => {
-    const foundedChat = chatsApi.find((chatObj) => chatObj.id === +id)
-    if (foundedChat) {
+  fetchChatByID: async (id) => {
+    const resP = await fetch(`/api/chat/${id}`);
+    const res = await resP.json()
+
+    if (res.id !== undefined) {
       set((state) => ({ chats: {
         ...state.chats,
-        [foundedChat.id]: foundedChat,
+        [res.id]: res,
       } }))
     }
   },
 
-  sendMessage: (chatID, text) => {
+  sendMessage: async (chatID, text) => {
     const chat = get().chats[chatID];
     chat.messages.push({
       isOurs: true,
       text,
       time: getCurrTime(),
     })
+
+    const resP = await fetch(`/api/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text,
+        chatID,
+      })
+    });
+    const res = await resP.json()
 
     set((state) => ({
       chats: {
