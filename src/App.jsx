@@ -1,45 +1,38 @@
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { addMyMessageToChat, chatsApi, deleteMyMessage } from './api/chats'
 
-import { ActiveChat } from './components/ActiveChat/ActiveChat'
-import { List } from './components/List/List'
-import { MessageForm } from './components/MessageForm/MessageForm'
+import { ChatPage } from './components/ChatPage'
 import { chatsListApi } from './api/chatsList'
 // import styles from './App.css'
 import styles from './App.module.css'
 import { useState } from 'react'
 
 function App() {
-  const [activeChatID, setActiveChatID] = useState(0)
   const [chatsList, setChatsList] = useState(chatsListApi)
   const [activeChat, setActiveChat] = useState(chatsApi)
 
   const onFormSubmit = (messageText) => {
-    const myNewApi = addMyMessageToChat(activeChatID, messageText)
+    const myNewApi = addMyMessageToChat(0, messageText)
     setActiveChat(myNewApi);
   }
 
   const onMessageDelete = (messageID) => {
-    const myNewApi = deleteMyMessage(activeChatID, messageID)
+    const myNewApi = deleteMyMessage(0, messageID)
     setActiveChat(myNewApi);
   }
 
   return (
     <div className={styles.App}>
-      <div>
-        <List
-          list={chatsList}
-          activeId={activeChatID}
-          linkClickCallback={(id) => {setActiveChatID(id)}}
-        />
-      </div>
-      <div className={styles.RightColumn}>
-        <ActiveChat
-          messages={activeChat[activeChatID].messages}
-          messagesLength={activeChat[activeChatID].messages.length}
-          deleteMsgCallback={onMessageDelete}
-        />
-        <MessageForm onFormSubmit={(text) => onFormSubmit(text)} />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/chat/:activeChatID" element={<ChatPage
+            chatsList={chatsList}
+            activeChat={activeChat}
+            onMessageDelete={onMessageDelete}
+            onFormSubmit={onFormSubmit}
+          />} />
+        </Routes>
+      </Router>
     </div>
   )
 }
