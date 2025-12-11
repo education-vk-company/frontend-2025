@@ -17,7 +17,7 @@ export const chatsListApi = [
       },
       time: getCurrTime(),
     },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
+    avatar: 'https://i.pravatar.cc/300?img=11',
   },
   {
     id: 1,
@@ -35,7 +35,7 @@ export const chatsListApi = [
       },
       time: getCurrTime(),
     },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
+    avatar: 'https://i.pravatar.cc/300?img=10',
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ export const chatsListApi = [
       isRead: true,
       time: getCurrTime(),
     },
-    avatar: 'https://avatar.iran.liara.run/public/boy',
+    avatar: 'https://i.pravatar.cc/300?img=7',
   },
   {
     id: 3,
@@ -63,6 +63,6 @@ export const chatsListApi = [
       isRead: true,
       time: getCurrTime(),
     },
-    avatar: 'https://avatar.iran.liara.run/public/girl',
+    avatar: 'https://i.pravatar.cc/300?img=5',
   },
 ]
