@@ -1,15 +1,16 @@
 import { ActiveChat } from '../ActiveChat/ActiveChat'
 import { List } from '../List/List'
 import { MessageForm } from '../MessageForm/MessageForm'
-import styles from '../../App.module.css'
+import styles from './ChatPage.module.scss'
 import { useParams } from 'react-router-dom'
+import classNames from 'classnames'
 
 export const ChatPage = ({ chatsList, activeChat, onMessageDelete, onFormSubmit }) => {
   const { activeChatID } = useParams()
 
   return (
     <>
-      <div>
+      <div className={classNames(styles.ChatPage)}>
         <List
           list={chatsList}
           activeId={activeChatID}
