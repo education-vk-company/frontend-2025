@@ -8,9 +8,9 @@ import styles from './ChatPage.module.scss'
 import { useMessagesStore } from '../../store/messages'
 import { useParams } from 'react-router-dom'
 
-export const ChatPage = ({ onMessageDelete, onFormSubmit }) => {
+export const ChatPage = () => {
   const { activeChatID } = useParams()
-  const { chatsList, chats, fetchChatsList, fetchChatByID } = useMessagesStore()
+  const { chatsList, chats, fetchChatsList, fetchChatByID, sendMessage } = useMessagesStore()
 
   const activeChat = chats[activeChatID];
 
@@ -21,6 +21,14 @@ export const ChatPage = ({ onMessageDelete, onFormSubmit }) => {
   useEffect(() => {
     fetchChatByID(activeChatID)
   }, [activeChatID])
+
+  const onFormSubmit = (text) => {
+    sendMessage(activeChatID, text)
+  }
+
+  const onMessageDelete = () => {
+
+  }
 
   return (
     <>

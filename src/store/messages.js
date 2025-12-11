@@ -1,4 +1,5 @@
-import { chatsApi } from '../api/chats'
+import { chatsApi, getCurrTime } from '../api/chats'
+
 import { chatsListApi } from '../api/chatsList'
 import { create } from 'zustand'
 
@@ -22,6 +23,22 @@ export const useMessagesStore = create((set, get) => ({
         [foundedChat.id]: foundedChat,
       } }))
     }
+  },
+
+  sendMessage: (chatID, text) => {
+    const chat = get().chats[chatID];
+    chat.messages.push({
+      isOurs: true,
+      text,
+      time: getCurrTime(),
+    })
+
+    set((state) => ({
+      chats: {
+        ...state.chats,
+        [chat.id]: chat,
+      }
+    }))
   },
 }))
 

@@ -5,7 +5,7 @@ if (lsChats) {
   lsChats = JSON.parse(lsChats);
 }
 
-const getCurrTime = () => new Date().toLocaleTimeString()
+export const getCurrTime = () => new Date().toLocaleTimeString()
 
 export const chatsApi = lsChats || [
   {
