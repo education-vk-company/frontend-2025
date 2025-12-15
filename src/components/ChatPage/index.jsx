@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { memo, useEffect, useRef } from 'react'
 
 import { ActiveChat } from '../ActiveChat/ActiveChat'
 import { List } from '../List/List'
@@ -9,6 +9,8 @@ import { useMessagesStore } from '../../store/messages'
 import { useParams } from 'react-router-dom'
 
 export const ChatPage = () => {
+  const videoRef = useRef(null)
+
   const { activeChatID } = useParams()
   const { chatsList, chats, fetchChatsList, fetchChatByID, sendMessage } = useMessagesStore()
 
@@ -30,6 +32,26 @@ export const ChatPage = () => {
 
   }
 
+  const onVideoClick = async (e) => {
+    e.preventDefault()
+
+    const videoEl = videoRef.current
+
+    if (videoEl) {
+      const isActive = videoEl.currentTime > 0 && !videoEl.paused && !videoEl.ended;
+      if (isActive) {
+        videoEl.pause()
+        videoEl.srcObject = null
+        return
+      }
+
+      const constraints = { audio: true, video: true };
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      videoRef.current.srcObject = stream;
+      videoRef.current.play()
+    }
+  }
+
   return (
     <>
       <div className={classNames(styles.ChatPage)}>
@@ -44,7 +66,11 @@ export const ChatPage = () => {
           messagesLength={activeChat.messages.length}
           deleteMsgCallback={onMessageDelete}
         />}
-        <MessageForm onFormSubmit={(text) => onFormSubmit(text)} />
+        <video ref={videoRef}></video>
+        <MessageForm
+          onFormSubmit={(text) => onFormSubmit(text)}
+          onVideoClick={(e) => onVideoClick(e)}
+        />
       </div>
     </>
   )

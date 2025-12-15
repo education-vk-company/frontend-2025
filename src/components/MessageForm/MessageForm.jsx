@@ -1,7 +1,7 @@
 import styles from './MessageForm.module.scss'
 import { useRef } from 'react';
 
-export const MessageForm = ({ onFormSubmit }) => {
+export const MessageForm = ({ onFormSubmit, onVideoClick }) => {
   const inputRef = useRef(null);
 
   const onSubmit = (e) => {
@@ -19,6 +19,7 @@ export const MessageForm = ({ onFormSubmit }) => {
   return (
     <form className={styles.form} onSubmit={onSubmit}>
       <input className={styles.input} type="text" placeholder="Input text" ref={inputRef} />
+      <button onClick={(e) => onVideoClick(e)}>🎥</button>
       <input type="submit"/ >
     </form>
   )
