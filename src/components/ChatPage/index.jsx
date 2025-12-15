@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
 import { ActiveChat } from '../ActiveChat/ActiveChat'
 import { List } from '../List/List'
@@ -10,6 +10,10 @@ import { useParams } from 'react-router-dom'
 
 export const ChatPage = () => {
   const videoRef = useRef(null)
+  const recordedVideoRef = useRef(null)
+
+  const [mediaRecorder, setMediaRecorder] = useState(null)
+  const [chunks, setChanks] = useState([])
 
   const { activeChatID } = useParams()
   const { chatsList, chats, fetchChatsList, fetchChatByID, sendMessage } = useMessagesStore()
@@ -39,16 +43,43 @@ export const ChatPage = () => {
 
     if (videoEl) {
       const isActive = videoEl.currentTime > 0 && !videoEl.paused && !videoEl.ended;
-      if (isActive) {
-        videoEl.pause()
-        videoEl.srcObject = null
-        return
-      }
 
       const constraints = { audio: true, video: true };
       const stream = await navigator.mediaDevices.getUserMedia(constraints)
       videoRef.current.srcObject = stream;
+
+      if (mediaRecorder && isActive) {
+        videoEl.pause()
+        mediaRecorder.stop()
+        videoEl.srcObject = null
+        return
+      }
+
+      let myLocalMediaRecorder = mediaRecorder;
+      if (!myLocalMediaRecorder) {
+        myLocalMediaRecorder = new MediaRecorder(stream)
+        setMediaRecorder(myLocalMediaRecorder)
+
+        myLocalMediaRecorder.addEventListener('dataavailable', (event) => {
+          setChanks([...chunks, event.data])
+        })
+
+        myLocalMediaRecorder.addEventListener('stop', (event) => {
+          setTimeout(() => {
+            const blob = new Blob(chunks, { type: myLocalMediaRecorder.mimeType });
+            setChanks([]);
+            const mediaURL = URL.createObjectURL(blob);
+            const recordedVideoEl = recordedVideoRef.current;
+            if (recordedVideoEl) {
+              recordedVideoEl.src = mediaURL;
+              recordedVideoEl.play();
+            }
+          }, 300)
+        })
+      }
+
       videoRef.current.play()
+      myLocalMediaRecorder.start();
     }
   }
 
@@ -67,6 +98,7 @@ export const ChatPage = () => {
           deleteMsgCallback={onMessageDelete}
         />}
         <video ref={videoRef}></video>
+        <video ref={recordedVideoRef}></video>
         <MessageForm
           onFormSubmit={(text) => onFormSubmit(text)}
           onVideoClick={(e) => onVideoClick(e)}
