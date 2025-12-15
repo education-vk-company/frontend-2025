@@ -1,6 +1,6 @@
 import process from 'node:process';globalThis._importMeta_={url:import.meta.url,env:process.env};import { tmpdir } from 'node:os';
 import destr from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/destr/dist/index.mjs';
-import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestURL, getRequestHeader, getResponseHeader, getRequestHeaders, setResponseHeaders, setResponseStatus, send, appendResponseHeader, removeResponseHeader, createError, setResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, readBody, getQuery as getQuery$1 } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/h3/dist/index.mjs';
+import { defineEventHandler, handleCacheHeaders, splitCookiesString, createEvent, fetchWithEvent, isEvent, eventHandler, setHeaders, sendRedirect, proxyRequest, getRequestURL, getRequestHeader, getResponseHeader, getRequestHeaders, setResponseHeaders, setResponseStatus, send, appendResponseHeader, removeResponseHeader, createError, setResponseHeader, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, readBody, getQuery as getQuery$1, readMultipartFormData } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/h3/dist/index.mjs';
 import { createHooks } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/hookable/dist/index.mjs';
 import { createFetch, Headers as Headers$1 } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/ofetch/dist/node.mjs';
 import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/node-mock-http/dist/index.mjs';
@@ -19,7 +19,7 @@ import consola from 'file:///Users/d.zaitsev/Work/education/frontend2025/fronten
 import { ErrorParser } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/youch-core/build/index.js';
 import { Youch } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/youch/build/index.js';
 import { SourceMapConsumer } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/source-map/source-map.js';
-import { promises } from 'node:fs';
+import { promises, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname as dirname$1, resolve as resolve$1 } from 'file:///Users/d.zaitsev/Work/education/frontend2025/frontend2025/server/node_modules/pathe/dist/index.mjs';
 import { Server } from 'node:http';
@@ -906,7 +906,22 @@ const plugins = [
   
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"be97-3v4xeVJKVtc+kF4uPQ44bSJc7V0\"",
+    "mtime": "2025-12-15T17:18:12.999Z",
+    "size": 48791,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"2b67f-CNRk7i5W0umf71XomQW3ALXDyr4\"",
+    "mtime": "2025-12-15T17:18:12.999Z",
+    "size": 177791,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -997,12 +1012,14 @@ const _KdHNXB = eventHandler((event) => {
 
 const _lazy_r_195G = () => Promise.resolve().then(function () { return _id__get$1; });
 const _lazy_ueaCv4 = () => Promise.resolve().then(function () { return chatslist_get$1; });
+const _lazy_qQdnko = () => Promise.resolve().then(function () { return media_post$1; });
 const _lazy_tuACHZ = () => Promise.resolve().then(function () { return message_post$1; });
 
 const handlers = [
   { route: '', handler: _KdHNXB, lazy: false, middleware: true, method: undefined },
   { route: '/chat/:id', handler: _lazy_r_195G, lazy: true, middleware: false, method: "get" },
   { route: '/chatslist', handler: _lazy_ueaCv4, lazy: true, middleware: false, method: "get" },
+  { route: '/media', handler: _lazy_qQdnko, lazy: true, middleware: false, method: "post" },
   { route: '/message', handler: _lazy_tuACHZ, lazy: true, middleware: false, method: "post" }
 ];
 
@@ -1345,7 +1362,8 @@ const chats = [
       {
         isOurs: false,
         text: "hello1!",
-        time: getCurrTime()
+        time: getCurrTime(),
+        media: "http://localhost:5173/media/1765818339398.webm"
       },
       {
         isOurs: true,
@@ -1544,12 +1562,26 @@ const chatslist_get$1 = /*#__PURE__*/Object.freeze({
   default: chatslist_get
 });
 
+const media_post = defineEventHandler(async (event) => {
+  const form = await readMultipartFormData(event);
+  const body = form.at(0).data;
+  const filename = `../public/media/${Date.now()}.webm`;
+  writeFileSync(filename, body);
+  return { filename };
+});
+
+const media_post$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  default: media_post
+});
+
 const message_post = defineEventHandler(async (event) => {
-  const { text, chatID } = await readBody(event);
+  const { text, chatID, media } = await readBody(event);
   const newMessage = {
     isOurs: true,
     text,
-    time: getCurrTime()
+    time: getCurrTime(),
+    media
   };
   const chat = chats[chatID];
   if (chat) {

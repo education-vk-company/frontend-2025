@@ -9,6 +9,9 @@ declare module "nitropack/types" {
     '/chatslist': {
       'get': Simplify<Serialize<Awaited<ReturnType<typeof import('../../routes/chatslist.get').default>>>>
     }
+    '/media': {
+      'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../routes/media.post').default>>>>
+    }
     '/message': {
       'post': Simplify<Serialize<Awaited<ReturnType<typeof import('../../routes/message.post').default>>>>
     }

@@ -76,6 +76,7 @@ export const chats = [
         isOurs: false,
         text: 'hello1!',
         time: getCurrTime(),
+        media: 'http://localhost:5173/media/1765818339398.webm'
       },
       {
         isOurs: true,

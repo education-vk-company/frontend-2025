@@ -50,6 +50,7 @@ export const ChatPage = () => {
 
       if (isActive) {
         videoEl.pause()
+        mediaRecorder.stop()
         videoEl.srcObject = null
         setIsVideoActive(false);
         return
@@ -64,13 +65,6 @@ export const ChatPage = () => {
       setIsVideoActive(true);
       videoRef.current.srcObject = stream;
 
-      if (mediaRecorder && isActive) {
-        videoEl.pause()
-        mediaRecorder.stop()
-        videoEl.srcObject = null
-        return
-      }
-
       let myLocalMediaRecorder = mediaRecorder;
       if (!myLocalMediaRecorder) {
         myLocalMediaRecorder = new MediaRecorder(stream)
@@ -79,25 +73,43 @@ export const ChatPage = () => {
         myLocalMediaRecorder.addEventListener('dataavailable', (event) => {
           setChanks([...chunks, event.data])
         })
-
-        myLocalMediaRecorder.addEventListener('stop', (event) => {
-          setTimeout(() => {
-            const blob = new Blob(chunks, { type: myLocalMediaRecorder.mimeType });
-            setChanks([]);
-            const mediaURL = URL.createObjectURL(blob);
-            const recordedVideoEl = recordedVideoRef.current;
-            if (recordedVideoEl) {
-              recordedVideoEl.src = mediaURL;
-              recordedVideoEl.play();
-            }
-          }, 300)
-        })
       }
 
       videoRef.current.play()
       myLocalMediaRecorder.start();
     }
   }
+
+  useEffect(() => {
+    if (mediaRecorder && !isVideoActive && chunks.length) {
+      const blob = new Blob(chunks, { type: mediaRecorder.mimeType });
+      setChanks([]);
+
+      // Для превью
+      // const mediaURL = URL.createObjectURL(blob);
+      // const recordedVideoEl = recordedVideoRef.current;
+      // if (recordedVideoEl) {
+      //   recordedVideoEl.src = mediaURL;
+      //   recordedVideoEl.play();
+      // }
+
+      const formdata = new FormData();
+      formdata.append('video', blob, 'video.webm')
+
+      const sendMedia = async () => {
+        const data = await fetch('/api/media', {
+          method: 'POST',
+          body: formdata,
+        })
+
+        const filename = await data.json()
+        sendMessage(activeChatID, '', filename)
+      }
+
+      sendMedia()
+
+    }
+  }, [mediaRecorder, chunks, isVideoActive])
 
   return (
     <>
@@ -113,7 +125,6 @@ export const ChatPage = () => {
           messagesLength={activeChat.messages.length}
           deleteMsgCallback={onMessageDelete}
         />}
-        <video ref={recordedVideoRef}></video>
         <div
           className={classNames(styles.VideoKroozhocheckContainer, {[styles.VideoKroozhocheckContainerActive]: isVideoActive})}
           onClick={(e) => onVideoClick(e)}

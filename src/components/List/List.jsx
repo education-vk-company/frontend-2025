@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import styles from './List.module.scss'
 
 export const List = ({ list, linkClickCallback: callback, activeId }) => {
-  const ChatItem = ({ id, avatar, nickname, text, time }) => {
+  const ChatItem = ({ id, avatar, nickname, text, time, media }) => {
     const avatarStyles = {
       backgroundImage: `url(${avatar})`,
     }
@@ -17,13 +17,16 @@ export const List = ({ list, linkClickCallback: callback, activeId }) => {
         <div className={styles.preview}>
           <div className={styles.nickname}>{nickname}</div>
           <div className={styles.message}>{text}</div>
+          {
+            media && <video src={media}></video>
+          }
         </div>
         <div className={styles.meta}>{time}</div>
       </Link>
     )
   }
 
-  const ListEl = list.map(({ id, name, lastMessage, avatar }) => (
+  const ListEl = list.map(({ id, name, lastMessage, avatar, media }) => (
     <li className={classNames(styles.listItemWrapper, {[styles.listItemWrapperActive]: +activeId === id })} key={id}>
       <ChatItem
         id={id}
@@ -31,6 +34,7 @@ export const List = ({ list, linkClickCallback: callback, activeId }) => {
         time={lastMessage.time}
         avatar={avatar}
         text={lastMessage.text}
+        media={media}
       />
     </li>
   ))

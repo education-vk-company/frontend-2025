@@ -2,11 +2,12 @@ import { chats } from '../db'
 import { getCurrTime } from "../utils";
 
 export default defineEventHandler(async (event) => {
-  const { text, chatID } = await readBody(event)
+  const { text, chatID, media } = await readBody(event)
   const newMessage = {
     isOurs: true,
     text,
     time: getCurrTime(),
+    media,
   }
 
   const chat = chats[chatID];

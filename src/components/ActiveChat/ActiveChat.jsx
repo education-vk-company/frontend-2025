@@ -15,12 +15,16 @@ export const ActiveChat = ({ messages, messagesLength, deleteMsgCallback }) => {
     scrollElement.scrollTo(0, 100 * messagesLength)
   }, [messagesLength])
 
-  const Message = ({ isOurs, text, time, onDeleteClick }) => (
+  const Message = ({ isOurs, text, time, onDeleteClick, media }) => {
+    return (
     <div
       className={classNames(styles.acMessageWrapper, {[styles.acMessage_right]: isOurs})}
     >
       <div className={styles.acMessage}>
         <div className={styles.acText}>{text}</div>
+        {
+          media && <video src={media.filename} onClick={(e) => e.target.play()}></video>
+        }
         <div className={styles.acDeleteBtnContainer}>
           <div className={styles.acTime}>{time}</div>
           {
@@ -30,6 +34,7 @@ export const ActiveChat = ({ messages, messagesLength, deleteMsgCallback }) => {
       </div>
     </div>
   )
+  }
 
   const messagesEl = messages.map((props, index) => <Message
     {...props}

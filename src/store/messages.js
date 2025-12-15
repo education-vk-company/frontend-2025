@@ -27,7 +27,7 @@ export const useMessagesStore = create((set, get) => ({
     }
   },
 
-  sendMessage: async (chatID, text) => {
+  sendMessage: async (chatID, text, media) => {
     const chat = get().chats[chatID];
     chat.messages.push({
       isOurs: true,
@@ -43,6 +43,7 @@ export const useMessagesStore = create((set, get) => ({
       body: JSON.stringify({
         text,
         chatID,
+        media,
       })
     });
     const res = await resP.json()
