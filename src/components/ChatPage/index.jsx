@@ -20,6 +20,8 @@ export const ChatPage = () => {
 
   const activeChat = chats[activeChatID];
 
+  const [isVideoActive, setIsVideoActive] = useState(false)
+
   useEffect(() => {
     fetchChatsList();
   }, [fetchChatsList])
@@ -44,8 +46,22 @@ export const ChatPage = () => {
     if (videoEl) {
       const isActive = videoEl.currentTime > 0 && !videoEl.paused && !videoEl.ended;
 
-      const constraints = { audio: true, video: true };
+      setIsVideoActive(isActive);
+
+      if (isActive) {
+        videoEl.pause()
+        videoEl.srcObject = null
+        setIsVideoActive(false);
+        return
+      }
+
+      const constraints = { audio: true, video: {
+        width: 720,
+        height: 720,
+      } };
+
       const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      setIsVideoActive(true);
       videoRef.current.srcObject = stream;
 
       if (mediaRecorder && isActive) {
@@ -97,8 +113,13 @@ export const ChatPage = () => {
           messagesLength={activeChat.messages.length}
           deleteMsgCallback={onMessageDelete}
         />}
-        <video ref={videoRef}></video>
         <video ref={recordedVideoRef}></video>
+        <div
+          className={classNames(styles.VideoKroozhocheckContainer, {[styles.VideoKroozhocheckContainerActive]: isVideoActive})}
+          onClick={(e) => onVideoClick(e)}
+        >
+          <video className={classNames(styles.VideoKroozhocheck)} ref={videoRef}></video>
+        </div>
         <MessageForm
           onFormSubmit={(text) => onFormSubmit(text)}
           onVideoClick={(e) => onVideoClick(e)}
