@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 
+server/.nitro
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

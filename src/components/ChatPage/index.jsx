@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { ActiveChat } from '../ActiveChat/ActiveChat'
 import { List } from '../List/List'
@@ -15,6 +15,8 @@ export const ChatPage = () => {
   const { chatsList, chats, fetchChatsList, fetchChatByID, sendMessage } = useMessagesStore()
 
   const activeChat = chats[activeChatID];
+
+  const [isVideoActive, setIsVideoActive] = useState(false)
 
   useEffect(() => {
     fetchChatsList();
@@ -39,14 +41,23 @@ export const ChatPage = () => {
 
     if (videoEl) {
       const isActive = videoEl.currentTime > 0 && !videoEl.paused && !videoEl.ended;
+
+      setIsVideoActive(isActive);
+
       if (isActive) {
         videoEl.pause()
         videoEl.srcObject = null
+        setIsVideoActive(false);
         return
       }
 
-      const constraints = { audio: true, video: true };
+      const constraints = { audio: true, video: {
+        width: 720,
+        height: 720,
+      } };
+
       const stream = await navigator.mediaDevices.getUserMedia(constraints)
+      setIsVideoActive(true);
       videoRef.current.srcObject = stream;
       videoRef.current.play()
     }
@@ -66,7 +77,12 @@ export const ChatPage = () => {
           messagesLength={activeChat.messages.length}
           deleteMsgCallback={onMessageDelete}
         />}
-        <video ref={videoRef}></video>
+        <div
+          className={classNames(styles.VideoKroozhocheckContainer, {[styles.VideoKroozhocheckContainerActive]: isVideoActive})}
+          onClick={(e) => onVideoClick(e)}
+        >
+          <video className={classNames(styles.VideoKroozhocheck)} ref={videoRef}></video>
+        </div>
         <MessageForm
           onFormSubmit={(text) => onFormSubmit(text)}
           onVideoClick={(e) => onVideoClick(e)}
